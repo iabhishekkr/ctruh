@@ -7,8 +7,8 @@ function CanvasElem() {
     const [height, setHeight] = useState(window.innerHeight);
     const [color, setColor] = useState("#000000");
     const [color2, setColor2] = useState("#ffffff");
-    const [num, setNum] = useState(12);
-    const [number, setNumber] = useState(12);
+    const [num, setNum] = useState('12');
+    const [number, setNumber] = useState('12');
     const [error, setError] = useState(false);
     const colorSelector = (e) => {
         setColor(e.target.value);
