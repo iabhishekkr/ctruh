@@ -9,11 +9,11 @@ function CanvasElem() {
     const [color2, setColor2] = useState("#ffffff");
     const [num, setNum] = useState(12);
     const [number, setNumber] = useState(12);
+    const [error, setError] = useState(false);
     const colorSelector = (e) => {
         setColor(e.target.value);
         setMyStyle({ ...myStyle, backgroundColor: `${e.target.value}` })
     }
-
     const style2 = {
         backgroundColor: `${color}`,
         color: `${color2}`
@@ -49,11 +49,16 @@ function CanvasElem() {
 
     const numSet = (e) => {
         setNum(e.target.value);
+        setError(false);
     }
 
     const btnHandler = (e) => {
         e.preventDefault();
-        setNumber(num);
+        if (num.length == 2)
+            setNumber(num);
+        else
+            setError(true);
+
     }
 
 
@@ -66,7 +71,7 @@ function CanvasElem() {
         ctx.fillStyle = c;
         ctx.textAlign = "center";
         ctx.clearRect(0, 0, 200, 200);
-        ctx.font = "30px Comic Sans MS";
+        ctx.font = "50px Comic Sans MS";
         console.log(canvas.width);
         ctx.fillText(`${number}`, canvas.width / 2, canvas.height / 1.7);
         const setter = () => {
@@ -102,6 +107,9 @@ function CanvasElem() {
                 <input id='num' type="number" placeholder='Enter two digit number' onChange={numSet} value={num} style={style2} />
                 <button type='submit' onClick={btnHandler} style={style2}>Submit</button>
             </div>
+            {
+                error && <div style={{ color: 'red' }}>Please enter two digit number only</div>
+            }
         </div>
     )
 }
