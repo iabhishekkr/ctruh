@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import "./CanvasElem.css"
 
 function CanvasElem() {
-    const [myStyle, setMyStyle] = useState({ height: window.innerHeight / 3, width: window.innerWidth / 4, backgroundColor: '#000000' });
+    const [myStyle, setMyStyle] = useState({ height: window.innerHeight / 3, width: window.innerWidth / 2, backgroundColor: '#000000' });
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
     const [color, setColor] = useState("#000000");
@@ -22,7 +22,7 @@ function CanvasElem() {
     const canvasRef = useRef(null);
 
     function invertColor(hex) {
-        console.log(hex);
+        // console.log(hex);
         if (hex.indexOf('#') === 0) {
             hex = hex.slice(1);
         }
@@ -65,7 +65,9 @@ function CanvasElem() {
         setColor2(c);
         ctx.fillStyle = c;
         ctx.textAlign = "center";
-        ctx.clearRect(0, 0, 200, 200)
+        ctx.clearRect(0, 0, 200, 200);
+        ctx.font = "30px Comic Sans MS";
+        console.log(canvas.width);
         ctx.fillText(`${number}`, canvas.width / 2, canvas.height / 1.7);
         const setter = () => {
             setWidth(window.innerWidth);
@@ -73,9 +75,9 @@ function CanvasElem() {
             setMyStyle({
                 ...myStyle,
                 height: `${window.innerHeight / 3}px`,
-                width: `${window.innerWidth / 4}px`,
+                width: `${window.innerWidth / 2}px`,
             })
-            console.log(window.innerHeight, width);
+            // console.log(window.innerHeight, width);
         }
         window.addEventListener('resize', setter);
 
