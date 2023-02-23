@@ -9,6 +9,10 @@
     transform: translate(-50%, -50%);
 }
 
+canvas {
+    cursor: zoom-in;
+}
+
 .num-input {
     display: flex;
     width: 100%;

@@ -7,8 +7,9 @@ function CanvasElem() {
     const [height, setHeight] = useState(window.innerHeight);
     const [color, setColor] = useState("#000000");
     const [color2, setColor2] = useState("#ffffff");
-    const [num, setNum] = useState('12');
-    const [number, setNumber] = useState('12');
+    const a = Math.floor(Math.random() * 99) + 1;
+    const [num, setNum] = useState(a + "");
+    const [number, setNumber] = useState(a + "");
     const [error, setError] = useState(false);
     const colorSelector = (e) => {
         setColor(e.target.value);
@@ -91,6 +92,32 @@ function CanvasElem() {
         }
     });
 
+    useEffect(() => {
+        const canvas = canvasRef.current
+        const context = canvas.getContext('2d');
+
+        canvas.addEventListener('mousemove', (event) => {
+            console.log("canvas " + width, height, event.clientX, event.clientY);
+
+            if (Math.abs((width / 2) - event.clientX) <= 50 && Math.abs((height / 2) - event.clientY) <= 50) {
+                console.log('true');
+                context.clearRect(0, 0, 200, 200);
+                context.font = "80px Comic Sans MS";
+                context.fillText(`${number}`, canvas.width / 2, canvas.height / 1.5);
+
+            }
+            else {
+                context.clearRect(0, 0, 200, 200);
+                context.font = "50px Comic Sans MS";
+                context.fillText(`${number}`, canvas.width / 2, canvas.height / 1.7);
+            }
+        });
+
+        return () => {
+            // canvas.removeEventListener('mousemove', )
+        }
+    })
+
     return (
         <div className='main'>
             <div className="picker">
@@ -102,6 +129,7 @@ function CanvasElem() {
                 <canvas style={myStyle} ref={canvasRef} >
                 </canvas>
             </div>
+
             <br />
             <div className="num-input">
                 <input id='num' type="number" placeholder='Enter two digit number' onChange={numSet} value={num} style={style2} />
